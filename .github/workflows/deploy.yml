@@ -20,6 +20,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: my-react-app-2
         run: npm install
 
       - name: Build
@@ -34,7 +35,7 @@ jobs:
 
       - name: Deploy to DEV
         if: github.ref == 'refs/heads/develop'
-        run: aws s3 sync dist s3://my-react-vite-dev-2026 --delete
+        run: aws s3 sync my-react-app-2/dist s3://my-react-vite-dev-2026 --delete
 
       - name: Deploy to PROD
         if: github.ref == 'refs/heads/main'
