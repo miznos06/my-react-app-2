@@ -32,4 +32,4 @@ jobs:
       - name: Deploy to S3
         run: |
           cd my-react-app-2
-          aws s3 sync dist s3://あなたのバケット名 --delete
+          aws s3 sync dist s3://my-react-vite-dev-2026 --delete
