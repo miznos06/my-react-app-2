@@ -39,3 +39,10 @@ jobs:
       - name: Deploy to PROD
         if: github.ref == 'refs/heads/main'
         run: aws s3 sync dist s3://my-react-vite-prod-2026 --delete
+
+      - name: Invalidate CloudFront (index.html only)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/index.html"
